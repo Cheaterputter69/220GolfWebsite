@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>220 Golf Arena</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ---------- BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #0d1a2d 0%, #111c31 100%);
+            color: #e9ecf3;
+            overflow-x: hidden;
+        }
+
+        /* ---------- HEADER ---------- */
+        header {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 420px;
+            background: rgba(13, 26, 45, 0.7);
+            backdrop-filter: blur(15px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow:
+                inset 0 0 10px rgba(255, 255, 255, 0.05),
+                0 0 15px rgba(161, 43, 43, 0.25),
+                0 10px 25px rgba(0, 0, 0, 0.4);
+            animation: pulseBorder 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseBorder {
+
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(161, 43, 43, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(161, 43, 43, 0.6);
+            }
+        }
+
+        header img {
+            width: 45px;
+            height: 45px;
+        }
+
+        header button {
+            background: linear-gradient(145deg, #a12b2b 0%, #7d1f1f 100%);
+            border: none;
+            color: #fff;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.25);
+            box-shadow: 0 2px 10px rgba(161, 43, 43, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        header button:hover {
+            background: linear-gradient(145deg, #c13d3d 0%, #a12b2b 100%);
+            transform: translateY(-2px);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent 60%);
+            z-index: 1;
+        }
+
+        .hero img.bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            transform: translateY(0);
+            transition: transform 0.1s linear;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease forwards 0.5s;
+            transform: translateY(-30px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(-30px);
+            }
+        }
+
+        .hero-inner {
+            background: rgba(13, 26, 45, 0.55);
+            backdrop-filter: blur(8px);
+            padding: 24px 30px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+            color: #f1f2f4;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #d4d7db;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .cta {
+            background: linear-gradient(145deg, #a12b2b 0%, #7d1f1f 100%);
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.4);
+            transition: all 0.3s ease;
+            animation: ctaPulse 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes ctaPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(161, 43, 43, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 16px rgba(161, 43, 43, 0.6);
+            }
+        }
+
+        .hero .cta:hover {
+            background: linear-gradient(145deg, #c13d3d 0%, #a12b2b 100%);
+            transform: translateY(-2px);
+        }
+
+        /* ---------- FLOATING ICON BAR ---------- */
+        .icon-scroll {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 18px;
+            overflow-x: auto;
+            background: radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.08), rgba(13, 26, 45, 0.8));
+            backdrop-filter: blur(15px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            padding: 12px 20px;
+            max-width: 90%;
+            z-index: 1000;
+            scroll-snap-type: x mandatory;
+            box-shadow:
+                inset 0 0 10px rgba(255, 255, 255, 0.05),
+                0 0 15px rgba(161, 43, 43, 0.25),
+                0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .icon-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .icon {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            animation: floatPulse 3.5s ease-in-out infinite;
+            animation-delay: calc(var(--i)*0.2s);
+        }
+
+        @keyframes floatPulse {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .icon p {
+            font-size: 0.75rem;
+            color: #d4d7db;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* ---------- MODALS ---------- */
+        /* ---------- SIMPLE FADE-IN / FADE-OUT ---------- */
+        .modal {
+            width: 90%;
+            height: 90%;
+            background: rgba(13, 26, 45, 0.95);
+            border: 1px solid rgba(161, 43, 43, 0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            color: #fff;
+            box-shadow: 0 0 25px rgba(161, 43, 43, 0.25);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            overflow-y: auto;
+            pointer-events: none;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+        /* ---------- SIMPLE FADE-IN / FADE-OUT (FIXED VERSION) ---------- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            /* ✅ keep clickable and animatable */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            z-index: 1500;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: 1px solid #a12b2b;
+            color: #fff;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.4rem;
+            line-height: 1.2rem;
+            cursor: pointer;
+            z-index: 2001;
+            /* 👈 important: keep above any backdrop */
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #a12b2b;
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.6);
+        }
+
+
+        .modal h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            border-bottom: 1px solid rgba(161, 43, 43, 0.5);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: #d4d7db;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .accordion {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(161, 43, 43, 0.3);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .accordion:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(161, 43, 43, 0.5);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 10px 15px;
+            color: #d4d7db;
+        }
+
+        .accordion.active+.accordion-content {
+            display: block;
+        }
+
+        /* ---------- JOIN MODAL FORM UPGRADE (220GOLF PREMIUM STYLE) ---------- */
+
+        .join-modal {
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06), rgba(13, 26, 45, 0.95));
+            border: 1px solid rgba(161, 43, 43, 0.35);
+            box-shadow: 0 0 25px rgba(161, 43, 43, 0.25);
+            animation: modalFadeUp 0.5s ease-out;
+        }
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #e9ecf3;
+            margin-bottom: 5px;
+            letter-spacing: 0.2px;
+        }
+
+        .input-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-card:focus-within {
+            border-color: #a12b2b;
+            box-shadow: 0 0 8px rgba(161, 43, 43, 0.45);
+        }
+
+        input,
+        select {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* custom dropdown arrow */
+        .select-card select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="18" width="18" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5H5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px;
+            padding-right: 24px;
+            cursor: pointer;
+        }
+
+        select option {
+            background: #0d1a2d;
+            color: #fff;
+        }
+
+        /* radio / toggle group (single select) */
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .radio-group input {
+            display: none;
+        }
+
+        .radio-group label {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(161, 43, 43, 0.25);
+            border-radius: 12px;
+            padding: 10px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #e9ecf3;
+            font-weight: 500;
+        }
+
+        .radio-group label:hover {
+            border-color: #a12b2b;
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.35);
+        }
+
+        .radio-group input:checked+label {
+            background: linear-gradient(145deg, #a12b2b 0%, #7d1f1f 100%);
+            border-color: #a12b2b;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(161, 43, 43, 0.5);
+        }
+
+        /* Submit button upgrade */
+        button[type="submit"] {
+            background: linear-gradient(145deg, #a12b2b 0%, #7d1f1f 100%);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 30px;
+            padding: 12px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: center;
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.4);
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(145deg, #c13d3d 0%, #a12b2b 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(161, 43, 43, 0.5);
+        }
+
+        /* red glow divider under title */
+        .join-modal h2 {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .join-modal h2::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #a12b2b, transparent);
+            opacity: 0.7;
+        }
+
+
+        /* ---------- RESPONSIVE ---------- */
+        @media(min-width:600px) {
+            .hero h1 {
+                font-size: 2.7rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .modal {
+                width: 90%;
+                height: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button>Shop</button>
+        <img src="logo.png" alt="220 Golf Logo">
+        <button>Open App</button>
+    </header>
+
+    <section class="hero">
+        <img src="hero_shot.png" alt="220 Golf Arena" class="bg">
+        <div class="hero-content">
+            <div class="hero-inner">
+                <h1>Welcome to the 220 Golf Arena</h1>
+                <p>Powered by Trackman</p>
+                <button class="cta" data-modal="join">Join the Movement</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="icon-scroll">
+        <div class="icon" data-modal="roadmap" style="--i:1"><img src="logo.png">
+            <p>Roadmap</p>
+        </div>
+        <div class="icon" data-modal="founders" style="--i:2"><img src="logo.png">
+            <p>Founders</p>
+        </div>
+        <div class="icon" data-modal="concept" style="--i:3"><img src="logo.png">
+            <p>Concept</p>
+        </div>
+        <div class="icon" data-modal="media" style="--i:4"><img src="logo.png">
+            <p>Media</p>
+        </div>
+        <div class="icon" data-modal="qa" style="--i:5"><img src="logo.png">
+            <p>Q&amp;A</p>
+        </div>
+        <div class="icon" data-modal="info" style="--i:6"><img src="logo.png">
+            <p>Info</p>
+        </div>
+
+    </div>
+
+    <!-- ---------- MODAL STRUCTURES ---------- -->
+    <div class="modal-overlay" id="roadmap">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>220 Golf Roadmap</h2>
+            <div class="accordion">Phase 1: Brand Launch</div>
+            <div class="accordion-content">Merch rollout, early adopters, online presence.</div>
+            <div class="accordion">Phase 2: Facility Buildout</div>
+            <div class="accordion-content">Construction of short game arena and clubhouse.</div>
+            <div class="accordion">Phase 3: Membership & App</div>
+            <div class="accordion-content">Beta testing, Trackman integration, investor onboarding.</div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="founders">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>Founders</h2>
+            <p><strong>Taylor Travis</strong> — 24 years competitive golf experience, UCLA / USF scholarship athlete, 5×
+                USGA finalist.</p>
+            <p><strong>Ryan Sloane</strong> — 34 years competitive golf, Santa Clara University alum, 10× USGA finalist,
+                2× NCGA Champion.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="concept">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>Concept & Design</h2>
+            <p>The 220 Golf Arena is a tech-forward training environment blending Trackman analytics, mentorship, and
+                community within a private elite membership model.</p>
+            <div class="accordion">Design Philosophy</div>
+            <div class="accordion-content">Modern architecture meets performance functionality with natural light and
+                simulated environments.</div>
+            <div class="accordion">Tech Integration</div>
+            <div class="accordion-content">Full Trackman suite, AI-driven performance tracking, and data dashboards.
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="media">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>Media</h2>
+            <p>Explore our latest content, videos, and behind-the-scenes footage from the 220 Golf Arena.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="qa">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>Q&amp;A</h2>
+            <p>Common questions about memberships, facility access, and technology integrations.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="info">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2>Information</h2>
+            <p>General updates, contact information, and upcoming announcements for 220 Golf.</p>
+        </div>
+    </div>
+
+    <!-- JOIN THE MOVEMENT MODAL -->
+    <!-- JOIN THE MOVEMENT MODAL -->
+    <div class="modal-overlay" id="join">
+        <div class="modal join-modal">
+            <button class="modal-close" type="button">&times;</button>
+            <h2>Join the Movement</h2>
+
+            <form id="joinForm">
+                <!-- Name -->
+                <div class="input-card">
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+
+                <!-- Email -->
+                <div class="input-card">
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="input-card">
+                    <input type="tel" id="phone" placeholder="(123) 456-7890">
+                </div>
+
+                <!-- Handicap -->
+                <div class="input-card select-card">
+                    <select id="handicap">
+                        <option value="">Select your handicap</option>
+                        <option value="below0">Below 0</option>
+                        <option value="1-9">1–9</option>
+                        <option value="10-18">10–18</option>
+                        <option value="18+">18+</option>
+                    </select>
+                </div>
+
+                <!-- Frequency -->
+                <div class="input-card select-card">
+                    <select id="frequency">
+                        <option value="">Select frequency</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="biweekly">Bi-Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+
+                <!-- Short Game -->
+                <div class="input-card select-card">
+                    <select id="shortgame">
+                        <option value="">Select answer</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <!-- Elements -->
+                <label>Which element matters most?</label>
+                <div class="radio-group" id="importance">
+                    <input type="radio" id="sim" name="element" value="Simulators">
+                    <label for="sim">Simulators</label>
+
+                    <input type="radio" id="loung" name="element" value="Lounge">
+                    <label for="loung">Lounge</label>
+
+                    <input type="radio" id="gym" name="element" value="Gym">
+                    <label for="gym">Gym</label>
+
+                    <input type="radio" id="short" name="element" value="Short Game Arena">
+                    <label for="short">Short Game Arena</label>
+
+                    <input type="radio" id="cam" name="element" value="Camaraderie">
+                    <label for="cam">Camaraderie</label>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="cta">Submit</button>
+            </form>
+            <p id="joinMessage" style="margin-top:12px;color:#58dd53;text-align:center;"></p>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- ---------- 220 GOLF JAVASCRIPT MASTER BLOCK ---------- -->
+    <!-- ---------- 220 GOLF JAVASCRIPT MASTER BLOCK ---------- -->
+    <!-- ---------- 220 GOLF JAVASCRIPT MASTER BLOCK ---------- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ---------- PARALLAX (Hero Motion) ---------- */
+            const heroImg = document.querySelector('.hero img.bg');
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                heroImg.style.transform = `translateY(${scrollY * 0.3}px) scale(1.05)`;
+            });
+
+            /* ---------- HEADER FLOAT ---------- */
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                const offset = Math.min(window.scrollY / 40, 8);
+                header.style.transform = `translateX(-50%) translateY(${offset}px)`;
+            });
+
+            /* ---------- MODAL LOGIC ---------- */
+            const modalTriggers = document.querySelectorAll('[data-modal]');
+            const overlays = document.querySelectorAll('.modal-overlay');
+
+            // Open any modal
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.getElementById(trigger.dataset.modal);
+                    if (!target) return;
+                    target.classList.add('active');
+                    const modal = target.querySelector('.modal');
+                    if (modal) modal.classList.add('active');
+                });
+            });
+
+            // Close modal when clicking background or close button
+            overlays.forEach(overlay => {
+                overlay.addEventListener('click', e => {
+                    if (
+                        e.target === overlay ||
+                        e.target.classList.contains('modal-close') ||
+                        e.target.closest('.modal-close')
+                    ) {
+                        overlay.classList.remove('active');
+                        const modal = overlay.querySelector('.modal');
+                        if (modal) modal.classList.remove('active');
+                    }
+                });
+            });
+
+            /* ---------- ACCORDIONS ---------- */
+            const accs = document.querySelectorAll('.accordion');
+            accs.forEach(acc => {
+                acc.addEventListener('click', () => {
+                    acc.classList.toggle('active');
+                });
+            });
+
+        }); // END DOMContentLoaded
+    </script>
+
+    <!-- ---------- FIREBASE + FORM SUBMISSION ---------- -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDHr7W3-VKGDTb3p_e6diFOVUlP23cgKW0",
+            authDomain: "golf-app-3ad07.firebaseapp.com",
+            databaseURL: "https://golf-app-3ad07-default-rtdb.firebaseio.com",
+            projectId: "golf-app-3ad07",
+            storageBucket: "golf-app-3ad07.firebasestorage.app",
+            messagingSenderId: "582728307189",
+            appId: "1:582728307189:web:b89841e3cee0411f9ed0bc",
+            measurementId: "G-S91P6E3X27"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        getAnalytics(app);
+
+        /* ---------- JOIN FORM LOGIC ---------- */
+        const form = document.getElementById('joinForm');
+        const message = document.getElementById('joinMessage');
+
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Radio-based single choice
+                const selected = form.querySelector('.radio-group input:checked');
+                const interests = selected ? selected.value : '';
+
+                const entry = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    handicap: document.getElementById('handicap').value,
+                    frequency: document.getElementById('frequency').value,
+                    shortgame: document.getElementById('shortgame').value,
+                    interests: interests,
+                    timestamp: new Date().toISOString()
+                };
+
+                push(ref(db, 'signups'), entry)
+                    .then(() => {
+                        message.textContent = "✅ Thank you for joining — we’ll be in touch soon!";
+                        form.reset();
+                    })
+                    .catch((err) => {
+                        message.textContent = "❌ Something went wrong: " + err.message;
+                    });
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>
