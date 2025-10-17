@@ -85,6 +85,33 @@
             transform: translateY(-2px);
         }
 
+        /* ---------- Header Buttons ---------- */
+        header a.shop-button,
+        header button {
+            background: #a83232;
+            /* mid-tone red */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: #fff;
+            padding: 8px 18px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover: brighter + soft glow */
+        header a.shop-button:hover,
+        header button:hover {
+            background: #c43c3c;
+            /* slightly lighter red on hover */
+            box-shadow: 0 0 10px rgba(219, 84, 84, 0.6);
+            transform: scale(1.03);
+        }
+
+
+
+
         /* ---------- HERO ---------- */
         .hero {
             position: relative;
@@ -285,7 +312,9 @@
         }
 
 
+        /* ---------- MODALBOTTOM / FADE-OUT (FIXED VERSION) ---------- */
         /* ---------- SIMPLE FADE-IN / FADE-OUT (FIXED VERSION) ---------- */
+
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -347,6 +376,394 @@
             margin-bottom: 10px;
         }
 
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+            justify-items: center;
+        }
+
+        .roadmap-card {
+            perspective: 1000px;
+            width: 250px;
+            height: 160px;
+        }
+
+        .roadmap-subtitle {
+            text-align: center;
+            color: #d4d7db;
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+        }
+
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            backface-visibility: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(161, 43, 43, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 0 15px rgba(161, 43, 43, 0.3);
+        }
+
+        .card-front h3 {
+            font-size: 1rem;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: rgba(161, 43, 43, 0.2);
+        }
+
+        .roadmap-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-back ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #f0f0f0;
+            text-align: left;
+        }
+
+        .card-back li {
+            margin-bottom: 6px;
+        }
+
+        /* ---------- FOUNDERS COLLAGE ---------- */
+        /* ---------- FOUNDERS COLLAGE (Centered + Balanced) ---------- */
+        /* ---------- FOUNDERS COLLAGE HEADER (Pinterest style) ---------- */
+        .founders-collage-header {
+            column-count: 3;
+            /* Adjust columns based on modal width */
+            column-gap: 10px;
+            height: 28vh;
+            /* enough to show all images neatly */
+            margin-bottom: 25px;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 4px;
+        }
+
+        /* Each image styled for a masonry effect */
+        .founders-collage-header img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            break-inside: avoid;
+            /* keeps images from splitting across columns */
+        }
+
+        /* Variation in heights for that “Pinterest” feel */
+        .founders-collage-header img:nth-child(1) {
+            height: 140px;
+        }
+
+        .founders-collage-header img:nth-child(2) {
+            height: 180px;
+        }
+
+        .founders-collage-header img:nth-child(3) {
+            height: 120px;
+        }
+
+        .founders-collage-header img:nth-child(4) {
+            height: 160px;
+        }
+
+        .founders-collage-header img:nth-child(5) {
+            height: 200px;
+        }
+
+        .founders-collage-header img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 18px rgba(161, 43, 43, 0.6);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .founders-collage-header {
+                column-count: 2;
+                height: auto;
+            }
+
+            .founders-collage-header img {
+                height: auto;
+            }
+        }
+
+
+
+        /* ---------- FOUNDERS SUBTITLE ---------- */
+        .founders-subtitle {
+            text-align: center;
+            color: #d4d7db;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            letter-spacing: 0.3px;
+            line-height: 1.5;
+        }
+
+        /* ---------- FOUNDER PROFILES ---------- */
+        /* ---------- MODERN FOUNDER CARD STYLE ---------- */
+        .founder-card-modern {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(161, 43, 43, 0.35);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(161, 43, 43, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .founder-card-modern:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-3px);
+        }
+
+        /* Header (image + name) */
+        .founder-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .founder-photo-modern {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(161, 43, 43, 0.6);
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.4);
+        }
+
+        .founder-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        /* Details section */
+        .founder-details p {
+            color: #d4d7db;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .founder-details ul {
+            list-style: none;
+            color: #d4d7db;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* ---------- MEDIA MODAL ---------- */
+        .media-subtitle {
+            text-align: center;
+            color: #d4d7db;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        /* HERO VIDEO */
+        .media-hero {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(161, 43, 43, 0.3);
+        }
+
+        .media-hero iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+
+        /* ---------- CONCEPT MODAL ---------- */
+        .concept-subtitle {
+            text-align: center;
+            color: #d4d7db;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .concept-section-title {
+            color: #db5454;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* Grid layout for concept sections */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        /* Individual image cards */
+        .concept-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(161, 43, 43, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .concept-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(161, 43, 43, 0.5);
+        }
+
+        .concept-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 12px;
+        }
+
+
+        /* ---------- CONCEPT PLACEHOLDER STYLING ---------- */
+        .concept-comingsoon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(161, 43, 43, 0.5);
+            border-radius: 14px;
+            height: 120px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px rgba(161, 43, 43, 0.3);
+        }
+
+        .concept-comingsoon p {
+            color: #d4d7db;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            opacity: 0.9;
+            text-align: center;
+            font-style: italic;
+        }
+
+
+
+        /* MEDIA GRID */
+        /* ---------- MEDIA MODAL ---------- */
+        .media-subtitle {
+            text-align: center;
+            color: #d4d7db;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .media-section-title {
+            text-align: center;
+            color: #db5454;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* ---------- VIDEO CONTAINERS ---------- */
+        .media-hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px rgba(161, 43, 43, 0.4);
+            border: 1px solid rgba(161, 43, 43, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .media-hero:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(219, 84, 84, 0.5);
+        }
+
+        /* ---------- EMBEDDED VIDEO ---------- */
+        .media-hero iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+
+        /* ---------- Fade-in Animation ---------- */
+        .media-hero {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+
+
+        /* ---------- Q and A Section ---------- */
+
         .accordion {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(161, 43, 43, 0.3);
@@ -355,6 +772,8 @@
             cursor: pointer;
             padding: 12px 15px;
             transition: all 0.3s ease;
+            font-weight: 600;
+            color: #fff;
         }
 
         .accordion:hover {
@@ -366,12 +785,61 @@
             display: none;
             padding: 10px 15px;
             color: #d4d7db;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         .accordion.active+.accordion-content {
             display: block;
         }
 
+        .modal p strong {
+            color: #db5454;
+            /* soft red accent to match your theme */
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+
+        /* ---------- Info Section ---------- */
+
+        .info-link {
+            color: #58dd53;
+            /* neon green accent — stands out nicely on your dark theme */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+        }
+
+        .info-link:hover {
+            color: #dbf93a;
+            /* bright yellow-green glow */
+            text-shadow: 0 0 8px rgba(219, 249, 58, 0.6);
+        }
+
+        /* ---------- INFO MODAL CENTER ALIGN ---------- */
+        #info .modal {
+            text-align: center;
+        }
+
+        #info .modal p,
+        #info .modal strong,
+        #info .modal a {
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Optional: slightly tighten line spacing for cleaner center alignment */
+        #info .modal p {
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+
+
+
+        /* ---------- JOIN MODAL FORM UPGRADE (220GOLF PREMIUM STYLE) ---------- */
         /* ---------- JOIN MODAL FORM UPGRADE (220GOLF PREMIUM STYLE) ---------- */
 
         .join-modal {
@@ -518,6 +986,8 @@
         }
 
 
+
+
         /* ---------- RESPONSIVE ---------- */
         @media(min-width:600px) {
             .hero h1 {
@@ -532,16 +1002,37 @@
                 width: 90%;
                 height: 90%;
             }
+
+            .founders-collage-header {
+                column-count: 2;
+                height: auto;
+            }
+
+            .founders-collage-header img {
+                height: auto;
+            }
+
+            .founder-photo-modern {
+                margin-bottom: 6px;
+            }
+
+            @media (min-width: 600px) {
+                .media-hero iframe {
+                    height: 400px;
+                }
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <button>Shop</button>
+        <a href="https://www.etsy.com/shop/220Golf" target="_blank" class="shop-button">Pro-Shop</a>
         <img src="logo.png" alt="220 Golf Logo">
         <button>Open App</button>
     </header>
+
+
 
     <section class="hero">
         <img src="hero_shot.png" alt="220 Golf Arena" class="bg">
@@ -577,68 +1068,287 @@
     </div>
 
     <!-- ---------- MODAL STRUCTURES ---------- -->
+    <!-- ---------- ROADMAP MODAL ---------- -->
     <div class="modal-overlay" id="roadmap">
         <div class="modal">
             <button class="modal-close">&times;</button>
-            <h2>220 Golf Roadmap</h2>
-            <div class="accordion">Phase 1: Brand Launch</div>
-            <div class="accordion-content">Merch rollout, early adopters, online presence.</div>
-            <div class="accordion">Phase 2: Facility Buildout</div>
-            <div class="accordion-content">Construction of short game arena and clubhouse.</div>
-            <div class="accordion">Phase 3: Membership & App</div>
-            <div class="accordion-content">Beta testing, Trackman integration, investor onboarding.</div>
-        </div>
-    </div>
+            <h2 style="text-align:center;">220 Golf Roadmap</h2>
+            <p class="roadmap-subtitle">
+                “This is our journey from idea to impact, the evolution of 220 Golf. Each phase
+                represents the milestones, partnerships, and innovations that bring us closer to redefining the game and
+                becoming Second to None.”
+            </p>
 
-    <div class="modal-overlay" id="founders">
-        <div class="modal">
-            <button class="modal-close">&times;</button>
-            <h2>Founders</h2>
-            <p><strong>Taylor Travis</strong> — 24 years competitive golf experience, UCLA / USF scholarship athlete, 5×
-                USGA finalist.</p>
-            <p><strong>Ryan Sloane</strong> — 34 years competitive golf, Santa Clara University alum, 10× USGA finalist,
-                2× NCGA Champion.</p>
-        </div>
-    </div>
+            <div class="roadmap-grid">
+                <div class="roadmap-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>End of Year 2025</h3>
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li>Finalize branding</li>
+                                <li>Merch expansion</li>
+                                <li>Build online presence</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="modal-overlay" id="concept">
-        <div class="modal">
-            <button class="modal-close">&times;</button>
-            <h2>Concept & Design</h2>
-            <p>The 220 Golf Arena is a tech-forward training environment blending Trackman analytics, mentorship, and
-                community within a private elite membership model.</p>
-            <div class="accordion">Design Philosophy</div>
-            <div class="accordion-content">Modern architecture meets performance functionality with natural light and
-                simulated environments.</div>
-            <div class="accordion">Tech Integration</div>
-            <div class="accordion-content">Full Trackman suite, AI-driven performance tracking, and data dashboards.
+                <div class="roadmap-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>June 2026</h3>
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li>Finalize facility design</li>
+                                <li>Secure permits & contractors</li>
+                                <li>Investor phase 1 complete</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>End of Year 2026</h3>
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li>Construction complete</li>
+                                <li>Beta test short game arena</li>
+                                <li>Membership launch event</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>End of Year 2027</h3>
+                        </div>
+                        <div class="card-back">
+                            <ul>
+                                <li>Official grand opening</li>
+                                <li>App + simulator integration</li>
+                                <li>Expand to Monterey / LA</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- ---------- FOUNDERS MODAL ---------- -->
+    <div class="modal-overlay" id="founders">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <!-- ---------- COLLAGE HEADER (Pinterest Style) ---------- -->
+            <div class="founders-collage-header">
+                <img src="2008.jpg" alt="Taylor Travis">
+                <img src="bingmaloney.jpg" alt="Ryan Sloane">
+                <img src="cats.jpg" alt="Championship Illustration">
+                <img src="fresno.jpg" alt="Tournament Win">
+            </div>
+
+            <h2 style="text-align:center;">Meet the Founders</h2>
+            <p class="founders-subtitle">
+                Two decades of friendship. Over fifty combined years of competition.
+                From local fairways to USGA finals — the 220 Golf story was built by champions.
+                Together, Taylor Travis and Ryan Sloane bring the knowledge, drive, and experience
+                that define what it means to be <em>Second to None.</em>
+            </p>
+
+            <div class="founder-card-modern">
+                <div class="founder-header">
+                    <img src="Avantar.png" alt="Taylor Travis" class="founder-photo-modern">
+                    <h3 class="founder-name">Taylor Travis</h3>
+                </div>
+                <div class="founder-details">
+                    <p>24 years of competitive golf experience. 5× USGA finalist, UCLA & USF scholarship athlete,
+                        and lifelong student of the game.</p>
+                    <ul>
+                        <li>🏆 Amateur Champion — NCGA</li>
+                        <li>🎓 UCLA & USF Golf Teams</li>
+                        <li>💡 Co-Founder, Visionary of 220 Golf</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="founder-card-modern">
+                <div class="founder-header">
+                    <img src="ryan_headshot1.png" alt="Ryan Sloane" class="founder-photo-modern">
+                    <h3 class="founder-name">Ryan Sloane</h3>
+                </div>
+                <div class="founder-details">
+                    <p>34 years of competitive golf experience. 10× USGA finalist, 2× NCGA Four-Ball Champion,
+                        and lifelong mentor to elite players across California.</p>
+                    <ul>
+                        <li>🏆 10× USGA Finalist</li>
+                        <li>🎓 Santa Clara University Golfer</li>
+                        <li>💡 Co-Founder, Head of Competitive Programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------- CONCEPT MODAL ---------- -->
+    <!-- ---------- CONCEPT MODAL ---------- -->
+    <div class="modal-overlay" id="concept">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+
+            <h2 style="text-align:center;">Concept & Design</h2>
+            <p class="concept-subtitle" style="text-align:center; margin-bottom:25px; color:#d4d7db;">
+                Explore the creative foundation of 220 Golf — from the arena’s design language to the lifestyle products
+                and branding that define our identity.
+            </p>
+
+            <!-- ---------- SECTION: ARENA DESIGNS ---------- -->
+            <h3 class="concept-section-title">Arena Designs</h3>
+            <div class="concept-grid">
+                <div class="concept-item"><img src="concept1.png" alt="Arena Design 1"></div>
+                <div class="concept-item"><img src="concept2.png" alt="Arena Design 2"></div>
+                <div class="concept-item"><img src="concept3.png" alt="Arena Design 3"></div>
+                <div class="concept-item"><img src="concept4.png" alt="Arena Design 4"></div>
+            </div>
+
+            <!-- ---------- SECTION: MERCH DESIGNS ---------- -->
+            <h3 class="concept-section-title">Merch Designs</h3>
+            <div class="concept-comingsoon">
+                <p>🧢 Coming Soon — New 220 Golf Apparel Concepts in Progress</p>
+            </div>
+
+            <!-- ---------- SECTION: BRANDING DESIGNS ---------- -->
+            <h3 class="concept-section-title">Branding Designs</h3>
+            <div class="concept-comingsoon">
+                <p>🎯 Coming Soon — Logo, Identity, and Visual Brand Expansions</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ---------- MEDIA MODAL ---------- -->
+    <!-- ---------- MEDIA MODAL ---------- -->
     <div class="modal-overlay" id="media">
         <div class="modal">
             <button class="modal-close">&times;</button>
-            <h2>Media</h2>
-            <p>Explore our latest content, videos, and behind-the-scenes footage from the 220 Golf Arena.</p>
+
+            <!-- ---------- HEADER ---------- -->
+            <h2 style="text-align:center;">Media Gallery</h2>
+            <p class="media-subtitle" style="text-align:center; margin-bottom:25px; color:#d4d7db;">
+                Explore 220 Golf through competition, training, and behind-the-scenes moments — a look into the process
+                that defines <em>Second to None</em>.
+            </p>
+
+            <!-- ---------- MAIN FEATURE VIDEO ---------- -->
+            <h3 class="media-section-title">220 Golf Media</h3>
+            <div class="media-hero">
+                <iframe src="https://www.youtube.com/embed/isIrnhW-pIg?rel=0" title="220 Golf Overview" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- ---------- SECOND SECTION ---------- -->
+            <h3 class="media-section-title">Training & Teaching</h3>
+            <div class="media-hero">
+                <iframe src="https://www.youtube.com/embed/7LCG-JI32kY?rel=0" title="220 Golf Training Session"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </div>
 
+
+    <!-- ---------- Q&A MODAL ---------- -->
     <div class="modal-overlay" id="qa">
         <div class="modal">
             <button class="modal-close">&times;</button>
-            <h2>Q&amp;A</h2>
-            <p>Common questions about memberships, facility access, and technology integrations.</p>
+            <h2 style="text-align:center;">Q&A — Frequently Asked Questions</h2>
+            <p class="qa-subtitle" style="text-align:center; margin-bottom:20px; color:#d4d7db;">
+                Everything you need to know about 220 Golf — from design philosophy to membership experience.
+            </p>
+            <!-- Accordion questions -->
+            <div class="accordion">1. What is 220 Golf?</div>
+            <div class="accordion-content">220 Golf is an elite, tech-forward short-game and performance training
+                facility designed for serious golfers.</div>
+            <div class="accordion">2. Why is it called “220 Golf”?</div>
+            <div class="accordion-content">“220” represents peak performance — the mindset it takes to become <em>Second
+                    to None.</em></div>
+            <div class="accordion">3. What makes 220 Golf different?</div>
+            <div class="accordion-content">Our focus is mentorship and mastery, with personalized data-driven
+                development.</div>
+            <div class="accordion">4. What kind of technology do you use?</div>
+            <div class="accordion-content">TrackMan simulators, video analysis systems, and real-time stat dashboards.
+            </div>
+            <div class="accordion">5. Is 220 Golf only for professionals?</div>
+            <div class="accordion-content">No — it’s built for serious golfers at all levels committed to improving.
+            </div>
+            <div class="accordion">6. What does membership include?</div>
+            <div class="accordion-content">Access to the short-game arena, simulator bays, gym, mentorship programs, and
+                events.</div>
+            <div class="accordion">7. Where will the first facility be located?</div>
+            <div class="accordion-content">The first flagship is planned for the Silicon Valley / Monterey Bay region.
+            </div>
+            <div class="accordion">8. What’s the timeline for opening?</div>
+            <div class="accordion-content">Phase One (brand/merch) is live. Facility launch targeted for late 2026.
+            </div>
+            <div class="accordion">9. Will 220 Golf host events?</div>
+            <div class="accordion-content">Yes — tournaments, clinics, and member-only competitions will be regular
+                features.</div>
+            <div class="accordion">10. How can I join?</div>
+            <div class="accordion-content">Submit your info via the “Join the Movement” form to receive early access
+                details.</div>
         </div>
     </div>
 
+    <!-- ---------- INFO MODAL ---------- -->
     <div class="modal-overlay" id="info">
         <div class="modal">
             <button class="modal-close">&times;</button>
-            <h2>Information</h2>
-            <p>General updates, contact information, and upcoming announcements for 220 Golf.</p>
+            <h2 style="text-align:center;">Information</h2>
+            <p class="info-subtitle" style="text-align:center; margin-bottom:20px; color:#d4d7db;">
+                Learn more about who we are, what we’re building, and how to connect with 220 Golf.
+            </p>
+            <p><strong style="display:block; text-align:center;">Overview</strong>
+                220 Golf is a members-only training collective built for serious golfers.
+                We combine technology, mentorship, and community to help players reach their full potential.
+            </p>
+            <p><strong style="display:block; text-align:center;">Mission</strong>
+                Our goal is to create a space where performance and connection meet.
+                Every detail — from our coaching to our culture — is built around being <em>Second to None.</em>
+            </p>
+            <p><strong style="display:block; text-align:center;">Location</strong>
+                Our flagship facility is planned for the <em>Silicon Valley / Monterey Bay</em> area.
+            </p>
+            <p>
+                <strongx style="display:block; text-align:center;"><strong>Email:</strong>
+                    <a href="mailto:secondtononegolf@gmail.com?subject=Inquiry%20from%20220%20Golf%20Website"
+                        class="info-link">
+                        secondtononegolf@gmail.com
+                    </a><br>
+                    <strong>Instagram:</strong>
+                    <a href="https://www.instagram.com/220_golf/" target="_blank" class="info-link">@220_golf</a><br>
+                    <strong>Join:</strong> Use the “Join the Movement” form to stay connected and receive updates.
+            </p>
         </div>
     </div>
+
+
+
+
+
+
+
 
     <!-- JOIN THE MOVEMENT MODAL -->
     <!-- JOIN THE MOVEMENT MODAL -->
@@ -781,6 +1491,14 @@
                     acc.classList.toggle('active');
                 });
             });
+
+            /* ---------- ROADMAP FLIP CARDS ---------- */
+            document.querySelectorAll('.roadmap-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                });
+            });
+
 
         }); // END DOMContentLoaded
     </script>
